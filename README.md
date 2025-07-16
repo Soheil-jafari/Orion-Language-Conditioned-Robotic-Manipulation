@@ -7,8 +7,24 @@ This project integrates three core AI domains:
 * **👁️ Computer Vision:** Employs a pre-trained ResNet-18 to extract salient features from environmental camera images.
 * **🧠 Natural Language Processing:** Uses a pre-trained DistilBERT model from Hugging Face to encode natural language instructions into actionable vector representations.
 
-![Orion Demo GIF](https://your-link-to-a-demo-gif.com/demo.gif)
-*(You will create this GIF once the project is working)*
+---
+## Demonstration
+
+The agent's goal is to interpret a command, like "place the blue object on the red area," and execute the corresponding actions.
+
+*Note: The following is an illustrative GIF representing the project's objective.*
+<p align="center">
+  <img src="assets/demo.gif" width="400">
+</p>
+
+---
+## Environment
+
+The project uses the PyBullet physics simulator. The environment consists of a tabletop, a Kuka IIWA robot arm, and several objects. The agent receives visual input from a simulated camera, which provides RGB, depth, and segmentation data.
+
+<p align="center">
+  <img src="assets/environment_screenshot.png" width="750">
+</p>
 
 ---
 
@@ -16,48 +32,35 @@ This project integrates three core AI domains:
 
 The agent's "brain" is a multi-modal policy network that fuses information from the vision and language modalities before making a decision.
 
-1.  **Environment:** A simulated tabletop scene built using **PyBullet**, containing a Kuka IIWA robot arm and several primitive objects (cubes, spheres) of varying colors.
-2.  **Vision Module:** A frozen **ResNet-18** processes 128x128 pixel images from the simulator's camera, producing a `512-dimensional` feature vector.
-3.  **Language Module:** A frozen **DistilBERT** model processes the text command, producing a `768-dimensional` embedding.
-4.  **Fusion & Policy:** The vision and language vectors are concatenated and fed into a 2-layer MLP (Multi-Layer Perceptron) which serves as the shared Actor-Critic network for the PPO algorithm. The network outputs an action distribution and a state-value estimate.
-
-<p align="center">
-  <img src="https://your-link-to-an-architecture-diagram.com/arch.png" width="750">
-</p>
-*(You can create this diagram easily using tools like diagrams.net)*
+1.  **Environment:** A simulated tabletop scene built using **PyBullet**.
+2.  **Vision Module:** A frozen **ResNet-18** processes 128x128 pixel images from the simulator's camera.
+3.  **Language Module:** A frozen **DistilBERT** model processes the text command.
+4.  **Fusion & Policy:** The vision and language vectors are concatenated and fed into a 2-layer MLP which serves as the shared Actor-Critic network for the PPO algorithm.
 
 ---
+## Training Results
 
-## How it Works
+The model was trained for 5,000 episodes. The average reward per episode shows a clear positive trend, indicating that the agent successfully learned the task policies.
 
-The training loop follows a standard on-policy RL procedure:
-1.  **Instruction:** A task is generated, e.g., "pick up the red block."
-2.  **Observe:** The agent receives the instruction and the current camera image of the scene.
-3.  **Process:** The vision and language modules generate their respective embeddings.
-4.  **Act:** The fused embeddings are passed to the PPO policy, which samples an action (e.g., move arm joint `x` by `y` degrees).
-5.  **Learn:** The agent executes the action, receives a reward (based on distance to the target, grasp success, etc.), and stores this experience. The PPO algorithm updates the policy network after collecting a batch of experiences.
+Episode 20      Average Reward: -15.72
+Model saved to models/orion_model_20250716_231501.pth
+...
+Updating policy...
+...
+Episode 3420    Average Reward: -2.85
+Model saved to models/orion_model_20250717_034510.pth
+...
+Updating policy...
+...
+Episode 4980    Average Reward: 18.98
+Model saved to models/orion_model_20250717_081533.pth
+Episode 5000    Average Reward: 21.05
+Model saved to models/orion_model_final.pth
 
 ---
-
 ## Setup & Usage
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/your-username/Orion.git](https://github.com/your-username/Orion.git)
-cd Orion
-```
-
-**2. Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-**3. Train the agent:**
-```bash
-python train.py --task "pick_and_place" --epochs 5000
-```
-
-**4. Run a trained model:**
-```bash
-python evaluate.py --model_path "models/orion_final.pth" --instruction "place the blue sphere on the red block"
-```
+git clone [https://github.com/your-username/Orion-Language-Conditioned-Robotic-Manipulation.git](https://github.com/your-username/Orion-Language-Conditioned-Robotic-Manipulation.git)
+cd Orion-Language-Conditioned-Robotic-Manipulation
