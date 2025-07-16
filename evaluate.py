@@ -2,8 +2,8 @@ import torch
 import time
 import argparse
 
-from src.environment import OrionEnv
-from src.models import ActorCritic
+from environment import OrionEnv
+from source.models import ActorCritic
 
 def evaluate(model_path, instruction):
     """
