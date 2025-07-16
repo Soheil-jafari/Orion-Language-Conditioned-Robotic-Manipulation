@@ -23,7 +23,7 @@ The agent's goal is to interpret a command, like "place the blue object on the r
 The project uses the PyBullet physics simulator. The environment consists of a tabletop, a Kuka IIWA robot arm, and several objects. The agent receives visual input from a simulated camera, which provides RGB, depth, and segmentation data.
 
 <p align="center">
-  <img src="asset/environment_pic.png" width="750">
+  <img src="asset/Screenshot 2025-07-17 004657.png" width="750">
 </p>
 
 ---
