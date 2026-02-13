@@ -58,6 +58,44 @@ Episode 5000    Average Reward: 21.05
 Model saved to models/orion_model_final.pth
 
 ---
+
+---
+
+## 📈 Results
+
+This section summarizes training behavior and rollout-level evaluation signals produced by the current PPO setup.
+
+### PPO Training Reward
+
+<p align="center">
+  <img width="820" alt="PPO Reward Curve" src="docs/reward_curve.png" />
+</p>
+
+The reward is shaped primarily by a distance term between the end-effector and the target (distance-based shaping typically yields negative rewards).  
+A trend toward higher reward (less negative) indicates the policy is reducing distance to the goal more consistently across episodes. The smoothed curve helps visualize overall learning dynamics under stochastic exploration.
+
+---
+
+### Success Rate
+
+<p align="center">
+  <img width="820" alt="Success Rate Curve" src="docs/success_curve.png" />
+</p>
+
+Success is defined as reaching within a fixed tolerance of the target. This plot shows the per-episode binary success signal along with a moving average to highlight stability and convergence behavior over training.
+
+---
+
+### Evaluation Rollout (Distance-to-Target)
+
+<p align="center">
+  <img width="820" alt="Evaluation Rollout Curve" src="docs/eval_distance_curve.png" />
+</p>
+
+Distance-to-target over time provides an interpretable view of control behavior. A decreasing curve suggests the policy is moving toward the target; plateaus or rebounds indicate instability, insufficient precision, or the need for reward/action scaling adjustments.
+
+---
+
 ## Setup & Usage
 
 **1. Clone the repository:**
