@@ -38,28 +38,6 @@ The agent's "brain" is a multi-modal policy network that fuses information from 
 4.  **Fusion & Policy:** The vision and language vectors are concatenated and fed into a 2-layer MLP which serves as the shared Actor-Critic network for the PPO algorithm.
 
 ---
-## Training Results
-
-The model was trained for 5,000 episodes. The average reward per episode shows a clear positive trend, indicating that the agent successfully learned the task policies.
-
-Episode 20      Average Reward: -15.72
-Model saved to models/orion_model_20250716_231501.pth
-...
-Updating policy...
-...
-Episode 3420    Average Reward: -2.85
-Model saved to models/orion_model_20250717_034510.pth
-...
-Updating policy...
-...
-Episode 4980    Average Reward: 18.98
-Model saved to models/orion_model_20250717_081533.pth
-Episode 5000    Average Reward: 21.05
-Model saved to models/orion_model_final.pth
-
----
-
----
 
 ## 📈 Results
 
@@ -82,7 +60,8 @@ A trend toward higher reward (less negative) indicates the policy is reducing di
   <img width="820" alt="Success Rate Curve" src="docs/success_curve.png" />
 </p>
 
-Success is defined as reaching within a fixed tolerance of the target. This plot shows the per-episode binary success signal along with a moving average to highlight stability and convergence behavior over training.
+Success is defined as reaching within a fixed tolerance of the target. This plot shows the per-episode binary success signal along with a moving average to highlight stability and convergence behavior over training. In the current run, the agent reduces distance but does not consistently satisfy the success threshold, highlighting the need for additional reward shaping, longer training, or curriculum.
+
 
 ---
 
