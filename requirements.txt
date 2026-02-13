@@ -1,5 +1,6 @@
 numpy
-pybullet
 torch
-torchvision
+pybullet
+matplotlib
 transformers
+tqdm
